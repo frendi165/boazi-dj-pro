@@ -1,0 +1,11 @@
+{
+  "name": "BOAZI DJ PRO",
+  "short_name": "BOAZI DJ",
+  "description": "A starter virtual DJ mixing app",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08090b",
+  "theme_color": "#08090b",
+  "icons": []
+}
