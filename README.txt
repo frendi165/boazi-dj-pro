@@ -1,13 +1,7 @@
-BOAZI DJ PRO — starter PWA bundle
-
-Files:
-- index.html: app interface and starter audio controls
-- manifest.webmanifest: installable-app metadata
-- sw.js: basic offline shell caching
-
-Important:
-1. This is an early prototype, not a finished commercial DJ app.
-2. To install it like an app, host these files over HTTPS (for example, GitHub Pages).
-3. Open the hosted URL in Chrome on Android, then use the browser menu > Add to Home screen / Install app.
-4. Track audio is loaded locally from the device. Don't upload copyrighted tracks unless you have the rights.
-5. Advanced beat sync, low-latency scratching, recording, and full effects routing need more development.
+BOAZI DJ PRO — Video-style interface upgrade
+1. Extract this ZIP on your phone.
+2. Upload index.html to the root of https://github.com/Frendi165/boazi-dj-pro (use Add file > Upload files).
+3. Replace the old index.html and commit changes to main.
+4. Wait a few minutes, then open https://frendi165.github.io/boazi-dj-pro/
+This update adds a compact Mixvibes-inspired layout, track title bars, record-style jog wheels, deck controls, tempo sliders, crossfader/master volume, sampler panel, EQ-control panel and settings/tutorial panel.
+Current working features: loading local audio files, play/pause, basic cue point, jog-wheel seeking, tempo adjustment, crossfader and simple test tones on sampler pads. Advanced recording/export, beatmatching, real EQ/filter processing, effects and keylock/automix/quantize are interface previews only and not implemented yet.
