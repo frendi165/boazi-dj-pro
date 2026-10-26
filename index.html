@@ -1,102 +1,622 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090909">
-<title>BOAZI DJ PRO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChronixDJ Pro</title>
+
 <style>
-:root{--bg:#090909;--panel:#141414;--panel2:#1b1b1b;--gold:#e6b84b;--gold2:#ffdc83;--muted:#9b9b9b;--line:#303030;--green:#9de6b2}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#29200c 0,transparent 45%),var(--bg);color:#f6f3ec;font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
-button,input{font:inherit}button{cursor:pointer}.app{max-width:1120px;margin:auto;padding:14px 14px 30px}
-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:16px}
-.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border:1px solid #9b7627;border-radius:12px;background:linear-gradient(145deg,#27200f,#0b0b0b);display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:20px;box-shadow:0 0 22px #e6b84b12}
-h1{font-size:17px;letter-spacing:1.8px;margin:0;font-weight:850}.sub{font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:2px}.status{border:1px solid #314638;color:var(--green);background:#102016;border-radius:99px;padding:6px 9px;font-size:10px;letter-spacing:.8px;white-space:nowrap}
-.hero{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:17px 0 13px}.eyebrow{color:var(--gold);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h2{font-size:clamp(22px,5vw,32px);margin:4px 0 0;letter-spacing:-.8px}.hero p{color:var(--muted);font-size:12px;margin:5px 0 0}.master-pill{font-size:10px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;color:#d8d2c4;white-space:nowrap}
-.decks{display:grid;grid-template-columns:1fr 1fr;gap:12px}.deck{min-width:0;background:linear-gradient(160deg,#1a1a1a,#101010 75%);border:1px solid #333;border-radius:16px;padding:13px;box-shadow:0 12px 35px #0008;overflow:hidden}.deck-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.deck-name{font-weight:850;letter-spacing:1.5px;font-size:13px}.deck-name b{color:var(--gold)}.deck-tag{font-size:9px;color:#aaa;border:1px solid #383838;padding:4px 6px;border-radius:6px}
-.track{background:#0a0a0a;border:1px solid #292929;border-radius:10px;padding:10px;margin-bottom:12px;min-height:77px}.track-title{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track-sub{font-size:10px;color:var(--muted);margin-top:4px}.load{display:inline-flex;align-items:center;gap:6px;margin-top:9px;background:#27200f;border:1px solid #65501e;color:var(--gold2);border-radius:7px;padding:7px 9px;font-size:10px;font-weight:750}.load input{display:none}
-.vinyl-wrap{display:grid;place-items:center;padding:5px 0 14px}
-.vinyl{width:min(66vw,310px);height:min(66vw,310px);max-width:310px;max-height:310px;min-width:180px;min-height:180px;border-radius:50%;border:7px solid #777;background:radial-gradient(circle at center,#050505 0 31%,#262626 31.5% 33%,#080808 34% 45%,#1a1a1a 45.5% 47%,#080808 47.5% 61%,#303030 61.5% 63%,#101010 63.5% 72%,#282828 73% 76%,#080808 77%);box-shadow:inset 0 0 0 4px #d0d0d0,inset 0 0 0 10px #292929,0 0 0 3px #171717,0 9px 22px #000c;display:grid;place-items:center;position:relative;overflow:hidden}
-.vinyl:before{content:"";position:absolute;inset:3%;border-radius:50%;background:repeating-conic-gradient(from 0deg,#151515 0deg 2deg,#242424 2.5deg 4deg);mask:radial-gradient(circle,transparent 0 62%,#000 63% 100%);opacity:.95}
-.vinyl:after{content:"";position:absolute;inset:19%;border-radius:50%;border:2px solid #444;box-shadow:0 0 0 8px #111,0 0 0 10px #333, inset 0 0 0 4px #111}
-.vinyl.playing{animation:spin 4s linear infinite}.label{width:46%;height:46%;border-radius:50%;background:radial-gradient(circle at 35% 25%,#343434,#090909 68%);color:#f5f5f5;display:grid;place-items:center;font-weight:950;font-size:clamp(16px,4vw,27px);letter-spacing:1px;z-index:1;border:3px solid #666;box-shadow:0 0 0 5px #151515,0 0 0 8px #393939;text-shadow:0 2px 4px #000}
-.label:before{content:"";position:absolute;width:15%;height:15%;border-radius:50%;background:#999;border:3px solid #333;box-shadow:0 0 0 2px #111}
-@keyframes spin{to{transform:rotate(360deg)}}
-.jog-tools{display:flex;justify-content:space-between;gap:5px;margin:0 0 9px}.jog-tools span{font-size:9px;font-weight:800;letter-spacing:.5px;color:#c7c7c7;background:linear-gradient(#292929,#101010);border:1px solid #454545;border-radius:5px;padding:6px 7px;text-align:center;flex:1}.time-row{display:flex;justify-content:space-between;color:#aaa;font-size:10px;font-variant-numeric:tabular-nums;margin:0 1px 5px}.seek{width:100%;accent-color:var(--gold);height:4px;margin:0 0 12px}
-.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.control{border:1px solid #383838;background:#222;color:#eee;border-radius:9px;min-height:42px;font-size:11px;font-weight:750}.control.main{background:linear-gradient(180deg,#f4ce6a,#c3932f);color:#151108;border-color:#e5bc56;font-size:12px}.control:active{transform:scale(.98)}
-.mini-label{display:flex;justify-content:space-between;color:#bdb7aa;font-size:10px;margin:13px 1px 5px}.mini-label strong{color:var(--gold2);font-weight:700}.vol{width:100%;accent-color:var(--gold);height:5px}
-.mixer{margin-top:14px;background:linear-gradient(160deg,#1b1b1b,#111);border:1px solid #333;border-radius:16px;padding:15px}.mixer-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.mixer-head h3{margin:0;font-size:12px;letter-spacing:1.5px}.mixer-head span{font-size:9px;color:var(--muted);letter-spacing:1px}.cross-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:8px}.cross-labels span:first-child{color:var(--gold)}.cross-labels span:last-child{color:#9bc9ff}.crossfader{width:100%;accent-color:var(--gold);height:8px}.center-mark{display:flex;justify-content:space-between;color:#686868;font-size:9px;margin-top:4px}
-.bottom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}.info{background:#111;border:1px solid #292929;border-radius:10px;padding:11px}.info strong{display:block;color:var(--gold2);font-size:10px;letter-spacing:1px}.info span{display:block;color:var(--muted);font-size:10px;margin-top:4px}
-footer{text-align:center;color:#656565;font-size:10px;margin:17px 0 0;letter-spacing:.6px}
-@media(min-width:760px){.app{padding:22px}.deck{padding:18px}.decks{gap:16px}.track{min-height:88px}.vinyl{width:190px;height:190px}.mixer{padding:20px}}
-@media(max-width:370px){.vinyl{width:58vw;height:58vw;min-width:145px;min-height:145px;border-width:5px}.app{padding:9px}.decks{gap:7px}.deck{padding:9px}.deck-tag{display:none}.control{font-size:10px}.track{padding:8px}.status{font-size:9px}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #090b10;
+  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 18px 12px;
+  text-align: center;
+  background: #141821;
+  border-bottom: 2px solid #00e5ff;
+}
+
+header h1 {
+  margin: 0;
+  color: #00e5ff;
+  letter-spacing: 3px;
+}
+
+header p {
+  color: #aaa;
+  margin-bottom: 0;
+}
+
+main {
+  padding: 12px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.decks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.deck {
+  background: #171b25;
+  padding: 12px;
+  border: 1px solid #333b4c;
+  border-radius: 12px;
+  min-width: 0;
+}
+
+.deck h2 {
+  text-align: center;
+  margin-top: 4px;
+}
+
+.deck-a h2 {
+  color: #00e5ff;
+}
+
+.deck-b h2 {
+  color: #ff4bd8;
+}
+
+video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.track {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 12px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #00e5ff;
+}
+
+button, .file-button {
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 7px;
+  margin: 3px 0;
+  color: white;
+  background: #30394b;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+.play {
+  background: #087d68;
+}
+
+.stop {
+  background: #9f2942;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.section {
+  margin-top: 14px;
+  padding: 15px;
+  background: #171b25;
+  border: 1px solid #333b4c;
+  border-radius: 12px;
+}
+
+.section h3 {
+  margin-top: 0;
+  color: #00e5ff;
+}
+
+.mixer-row {
+  margin: 14px 0;
+}
+
+.mixer-row label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+
+.cues {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.cue {
+  background: #5d327e;
+  min-height: 40px;
+}
+
+.status {
+  color: #aab5c8;
+  font-size: 12px;
+}
+
+footer {
+  text-align: center;
+  padding: 22px 8px;
+  color: #778397;
+  font-size: 12px;
+}
+
+@media (max-width: 560px) {
+  main {
+    padding: 7px;
+  }
+
+  .decks {
+    gap: 7px;
+  }
+
+  .deck {
+    padding: 7px;
+  }
+
+  .deck h2 {
+    font-size: 16px;
+  }
+
+  button, .file-button {
+    font-size: 11px;
+    padding: 9px 3px;
+  }
+
+  .section {
+    padding: 11px;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="app">
+
 <header>
- <div class="brand"><div class="logo">B</div><div><h1>BOAZI DJ PRO</h1><div class="sub">MOBILE DJ SYSTEM</div></div></div>
- <div class="status">● READY TO MIX</div>
+  <h1>CHRONIXDJ</h1>
+  <p>PRO DJ & VIDEO MIXING STUDIO</p>
 </header>
-<section class="hero"><div><div class="eyebrow">Performance console</div><h2>Make the mix yours.</h2><p>Load your tracks. Cue up. Blend the energy.</p></div><div class="master-pill">MASTER <b style="color:#e6b84b">STEREO</b></div></section>
-<main class="decks">
- <section class="deck" id="deckA">
-  <div class="deck-top"><div class="deck-name"><b>A</b> / DECK A</div><div class="deck-tag">PLAYER 01</div></div>
-  <div class="track"><div class="track-title" id="titleA">No track loaded</div><div class="track-sub" id="subA">Choose a music file to begin</div><label class="load">＋ LOAD TRACK<input id="fileA" type="file" accept="audio/*"></label></div>
-  <div class="jog-tools"><span>◀ REV</span><span>JOG / SCRATCH</span><span>FWD ▶</span></div><div class="vinyl-wrap"><div class="vinyl" id="vinylA"><div class="label">BOAZI</div></div></div><div class="jog-tools"><span>SYNC</span><span>DECK 1 / 2</span><span>± PITCH</span></div>
-  <div class="time-row"><span id="currentA">00:00</span><span id="durationA">00:00</span></div><input class="seek" id="seekA" type="range" min="0" max="100" value="0" aria-label="Deck A track position">
-  <div class="controls"><button class="control" id="stopA">■ STOP</button><button class="control main" id="playA">▶ PLAY</button><button class="control" id="resetA">↺ CUE</button></div>
-  <div class="mini-label"><span>CHANNEL LEVEL</span><strong id="volTextA">80%</strong></div><input class="vol" id="volA" type="range" min="0" max="100" value="80" aria-label="Deck A volume">
-  <audio id="audioA" preload="metadata"></audio>
- </section>
- <section class="deck" id="deckB">
-  <div class="deck-top"><div class="deck-name"><b>B</b> / DECK B</div><div class="deck-tag">PLAYER 02</div></div>
-  <div class="track"><div class="track-title" id="titleB">No track loaded</div><div class="track-sub" id="subB">Choose a music file to begin</div><label class="load">＋ LOAD TRACK<input id="fileB" type="file" accept="audio/*"></label></div>
-  <div class="jog-tools"><span>◀ REV</span><span>JOG / SCRATCH</span><span>FWD ▶</span></div><div class="vinyl-wrap"><div class="vinyl" id="vinylB"><div class="label">BOAZI</div></div></div><div class="jog-tools"><span>SYNC</span><span>DECK 2 / 2</span><span>± PITCH</span></div>
-  <div class="time-row"><span id="currentB">00:00</span><span id="durationB">00:00</span></div><input class="seek" id="seekB" type="range" min="0" max="100" value="0" aria-label="Deck B track position">
-  <div class="controls"><button class="control" id="stopB">■ STOP</button><button class="control main" id="playB">▶ PLAY</button><button class="control" id="resetB">↺ CUE</button></div>
-  <div class="mini-label"><span>CHANNEL LEVEL</span><strong id="volTextB">80%</strong></div><input class="vol" id="volB" type="range" min="0" max="100" value="80" aria-label="Deck B volume">
-  <audio id="audioB" preload="metadata"></audio>
- </section>
-</main>
-<section class="mixer">
- <div class="mixer-head"><h3>◈ CENTRAL MIXER</h3><span>MASTER CROSSFADE</span></div>
- <div class="cross-labels"><span>◀ DECK A</span><span>DECK B ▶</span></div>
- <input class="crossfader" id="crossfader" type="range" min="0" max="100" value="50" aria-label="Crossfader between Deck A and Deck B">
- <div class="center-mark"><span>A ONLY</span><span>CENTER MIX</span><span>B ONLY</span></div>
-</section>
-<div class="bottom"><div class="info"><strong>01 / LOAD</strong><span>Use audio files stored on your phone.</span></div><div class="info"><strong>02 / PLAY</strong><span>Start each deck independently.</span></div><div class="info"><strong>03 / BLEND</strong><span>Slide the crossfader to mix levels.</span></div></div>
-<footer>BOAZI DJ PRO · BROWSER PROTOTYPE · AUDIO FILES STAY ON YOUR DEVICE</footer>
+
+<main>
+
+<div class="decks">
+
+  <section class="deck deck-a">
+    <h2>DECK A</h2>
+
+    <video id="videoA" playsinline></video>
+
+    <label class="track">
+      LOAD AUDIO OR VIDEO
+      <input id="fileA" type="file"
+      accept="audio/*,video/*">
+    </label>
+
+    <p id="nameA" class="status">No track loaded</p>
+
+    <div class="controls">
+      <button class="play" onclick="playDeck('A')">
+        ▶ PLAY
+      </button>
+      <button onclick="pauseDeck('A')">
+        ❚❚ PAUSE
+      </button>
+      <button class="stop" onclick="stopDeck('A')">
+        ■ STOP
+      </button>
+    </div>
+
+    <div class="mixer-row">
+      <label>Track position</label>
+      <input id="seekA" type="range"
+      min="0" max="100" value="0"
+      oninput="seekDeck('A', this.value)">
+      <div id="timeA" class="status">00:00 / 00:00</div>
+    </div>
+
+    <div class="mixer-row">
+      <label>Deck volume</label>
+      <input id="volumeA" type="range"
+      min="0" max="1" step="0.01" value="0.8"
+      oninput="updateMixer()">
+    </div>
+
+    <div class="mixer-row">
+      <label>Playback speed</label>
+      <input type="range" min="0.5" max="1.5"
+      step="0.01" value="1"
+      oninput="setSpeed('A', this.value)">
+    </div>
+
+    <div class="mixer-row">
+      <label>Filter</label>
+      <input type="range" min="0" max="100"
+      value="100"
+      oninput="setFilter('A', this.value)">
+    </div>
+
+    <div class="mixer-row">
+      <label>Touch to scratch</label>
+      <input type="range" min="0" max="100"
+      value="0"
+      oninput="scratchDeck('A', this.value)">
+    </div>
+
+    <div class="cues">
+      <button class="cue" onclick="setCue('A',0)">CUE 1</button>
+      <button class="cue" onclick="setCue('A',1)">CUE 2</button>
+      <button class="cue" onclick="setCue('A',2)">CUE 3</button>
+      <button class="cue" onclick="setCue('A',3)">CUE 4</button>
+    </div>
+
+    <button onclick="toggleLoop('A')"
+    style="width:100%">LOOP IN / OUT</button>
+
+  </section>
+
+  <section class="deck deck-b">
+    <h2>DECK B</h2>
+
+    <video id="videoB" playsinline></video>
+
+    <label class="track">
+      LOAD AUDIO OR VIDEO
+      <input id="fileB" type="file"
+      accept="audio/*,video/*">
+    </label>
+
+    <p id="nameB" class="status">No track loaded</p>
+
+    <div class="controls">
+      <button class="play" onclick="playDeck('B')">
+        ▶ PLAY
+      </button>
+      <button onclick="pauseDeck('B')">
+        ❚❚ PAUSE
+      </button>
+      <button class="stop" onclick="stopDeck('B')">
+        ■ STOP
+      </button>
+    </div>
+
+    <div class="mixer-row">
+      <label>Track position</label>
+      <input id="seekB" type="range"
+      min="0" max="100" value="0"
+      oninput="seekDeck('B', this.value)">
+      <div id="timeB" class="status">00:00 / 00:00</div>
+    </div>
+
+    <div class="mixer-row">
+      <label>Deck volume</label>
+      <input id="volumeB" type="range"
+      min="0" max="1" step="0.01" value="0.8"
+      oninput="updateMixer()">
+    </div>
+
+    <div class="mixer-row">
+      <label>Playback speed</label>
+      <input type="range" min="0.5" max="1.5"
+      step="0.01" value="1"
+      oninput="setSpeed('B', this.value)">
+    </div>
+
+    <div class="mixer-row">
+      <label>Filter</label>
+      <input type="range" min="0" max="100"
+      value="100"
+      oninput="setFilter('B', this.value)">
+    </div>
+
+    <div class="mixer-row">
+      <label>Touch to scratch</label>
+      <input type="range" min="0" max="100"
+      value="0"
+      oninput="scratchDeck('B', this.value)">
+    </div>
+
+    <div class="cues">
+      <button class="cue" onclick="setCue('B',0)">CUE 1</button>
+      <button class="cue" onclick="setCue('B',1)">CUE 2</button>
+      <button class="cue" onclick="setCue('B',2)">CUE 3</button>
+      <button class="cue" onclick="setCue('B',3)">CUE 4</button>
+    </div>
+
+    <button onclick="toggleLoop('B')"
+    style="width:100%">LOOP IN / OUT</button>
+
+  </section>
 </div>
+
+<section class="section">
+  <h3>🎚️ MASTER MIXER</h3>
+
+  <div class="mixer-row">
+    <label>Crossfader — Deck A ↔ Deck B</label>
+    <input id="crossfader" type="range"
+    min="0" max="100" value="50"
+    oninput="updateMixer()">
+  </div>
+
+  <div class="mixer-row">
+    <label>Master volume</label>
+    <input id="master" type="range"
+    min="0" max="1" step="0.01" value="0.8"
+    oninput="updateMixer()">
+  </div>
+
+  <button onclick="toggleVideoFullscreen()">
+    📺 FULL-SCREEN VIDEO
+  </button>
+
+  <p id="message" class="status">
+    ChronixDJ ready. Load a track to begin.
+  </p>
+</section>
+
+<footer>
+  CHRONIXDJ PRO • YOUR MUSIC, YOUR MIX
+</footer>
+
+</main>
+
 <script>
-const decks = {};
-function fmt(s){if(!Number.isFinite(s)||s<0)return "00:00";const m=Math.floor(s/60),sec=Math.floor(s%60);return String(m).padStart(2,"0")+":"+String(sec).padStart(2,"0")}
-["A","B"].forEach(id=>{
- const audio=document.getElementById("audio"+id), file=document.getElementById("file"+id), play=document.getElementById("play"+id), stop=document.getElementById("stop"+id), cue=document.getElementById("reset"+id), seek=document.getElementById("seek"+id), vol=document.getElementById("vol"+id);
- decks[id]={audio,vol,objectUrl:null};
- file.addEventListener("change",()=>{
-  const f=file.files&&file.files[0]; if(!f)return;
-  if(decks[id].objectUrl)URL.revokeObjectURL(decks[id].objectUrl);
-  decks[id].objectUrl=URL.createObjectURL(f);audio.src=decks[id].objectUrl;audio.load();
-  document.getElementById("title"+id).textContent=f.name;
-  document.getElementById("sub"+id).textContent="LOCAL AUDIO · "+(f.type||"audio file");
-  play.textContent="▶ PLAY";document.getElementById("vinyl"+id).classList.remove("playing");
- });
- play.addEventListener("click",async()=>{
-  if(!audio.src){file.click();return}
-  if(audio.paused){try{await audio.play();play.textContent="Ⅱ PAUSE";document.getElementById("vinyl"+id).classList.add("playing")}catch(e){document.getElementById("sub"+id).textContent="Tap LOAD TRACK and choose audio"}}
-  else{audio.pause();play.textContent="▶ PLAY";document.getElementById("vinyl"+id).classList.remove("playing")}
- });
- stop.addEventListener("click",()=>{audio.pause();audio.currentTime=0;play.textContent="▶ PLAY";document.getElementById("vinyl"+id).classList.remove("playing")});
- cue.addEventListener("click",()=>{audio.currentTime=0;if(!audio.paused)audio.play().catch(()=>{})});
- seek.addEventListener("input",()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=(Number(seek.value)/100)*audio.duration});
- vol.addEventListener("input",()=>{document.getElementById("volText"+id).textContent=vol.value+"%";applyMix()});
- audio.addEventListener("loadedmetadata",()=>{document.getElementById("duration"+id).textContent=fmt(audio.duration);seek.value=0});
- audio.addEventListener("timeupdate",()=>{document.getElementById("current"+id).textContent=fmt(audio.currentTime);if(Number.isFinite(audio.duration)&&audio.duration>0)seek.value=audio.currentTime/audio.duration*100});
- audio.addEventListener("ended",()=>{play.textContent="▶ PLAY";document.getElementById("vinyl"+id).classList.remove("playing")});
+const decks = {
+  A: {
+    video: document.getElementById("videoA"),
+    cues: [null, null, null, null],
+    loopIn: null,
+    loopOut: null,
+    objectURL: null,
+    filter: 100
+  },
+  B: {
+    video: document.getElementById("videoB"),
+    cues: [null, null, null, null],
+    loopIn: null,
+    loopOut: null,
+    objectURL: null,
+    filter: 100
+  }
+};
+
+function message(text) {
+  document.getElementById("message").textContent = text;
+}
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return "00:00";
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return String(m).padStart(2, "0") + ":" +
+         String(s).padStart(2, "0");
+}
+
+["A", "B"].forEach(id => {
+  const d = decks[id];
+  const v = d.video;
+
+  document.getElementById("file" + id)
+    .addEventListener("change", event => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (d.objectURL) URL.revokeObjectURL(d.objectURL);
+
+      d.objectURL = URL.createObjectURL(file);
+      v.src = d.objectURL;
+      v.load();
+
+      document.getElementById("name" + id).textContent =
+        file.name;
+
+      d.cues = [null, null, null, null];
+      d.loopIn = null;
+      d.loopOut = null;
+
+      message("Loaded " + file.name + " on Deck " + id);
+    });
+
+  v.addEventListener("timeupdate", () => {
+    const seek = document.getElementById("seek" + id);
+
+    if (Number.isFinite(v.duration) && v.duration > 0) {
+      seek.value = v.currentTime / v.duration * 100;
+    }
+
+    document.getElementById("time" + id).textContent =
+      formatTime(v.currentTime) + " / " +
+      formatTime(v.duration);
+
+    if (d.loopIn !== null && d.loopOut !== null &&
+        v.currentTime >= d.loopOut) {
+      v.currentTime = d.loopIn;
+    }
+  });
+
+  v.addEventListener("ended", () => {
+    message("Deck " + id + " finished playing.");
+  });
 });
-function applyMix(){const x=Number(document.getElementById("crossfader").value)/100;decks.A.audio.volume=(Number(decks.A.vol.value)/100)*(1-x);decks.B.audio.volume=(Number(decks.B.vol.value)/100)*x}
-document.getElementById("crossfader").addEventListener("input",applyMix);applyMix();
+
+function playDeck(id) {
+  const v = decks[id].video;
+
+  if (!v.src) {
+    message("Load a track on Deck " + id + " first.");
+    return;
+  }
+
+  v.play().then(() => {
+    message("Playing Deck " + id);
+  }).catch(() => {
+    message("Playback unavailable. Try loading another file.");
+  });
+}
+
+function pauseDeck(id) {
+  decks[id].video.pause();
+  message("Deck " + id + " paused.");
+}
+
+function stopDeck(id) {
+  const v = decks[id].video;
+  v.pause();
+  v.currentTime = 0;
+  message("Deck " + id + " stopped.");
+}
+
+function seekDeck(id, value) {
+  const v = decks[id].video;
+
+  if (Number.isFinite(v.duration) && v.duration > 0) {
+    v.currentTime = Number(value) / 100 * v.duration;
+  }
+}
+
+function setSpeed(id, value) {
+  decks[id].video.playbackRate = Number(value);
+}
+
+function setFilter(id, value) {
+  const d = decks[id];
+  d.filter = Number(value);
+
+  // Basic high-frequency reduction.
+  // Full DJ filter effects need Web Audio processing.
+  const brightness = 0.5 + d.filter / 200;
+  d.video.style.filter = "brightness(" + brightness + ")";
+}
+
+function scratchDeck(id, value) {
+  const v = decks[id].video;
+
+  if (!Number.isFinite(v.duration) || v.duration <= 0) {
+    return;
+  }
+
+  // Basic touch-position seeking prototype,
+  // not a full vinyl scratching engine.
+  if (!v.paused) {
+    v.currentTime = Number(value) / 100 * v.duration;
+  }
+}
+
+function setCue(id, index) {
+  const d = decks[id];
+  const v = d.video;
+
+  if (!v.src) {
+    message("Load a track before setting hot cues.");
+    return;
+  }
+
+  if (d.cues[index] === null) {
+    d.cues[index] = v.currentTime;
+    message("Saved Cue " + (index + 1) + " on Deck " + id);
+  } else {
+    v.currentTime = d.cues[index];
+    message("Jumped to Cue " + (index + 1) + " on Deck " + id);
+  }
+}
+
+function toggleLoop(id) {
+  const d = decks[id];
+  const v = d.video;
+
+  if (!v.src) {
+    message("Load a track before creating a loop.");
+    return;
+  }
+
+  if (d.loopIn === null) {
+    d.loopIn = v.currentTime;
+    d.loopOut = null;
+    message("Loop IN set on Deck " + id + ". Press again to set OUT.");
+  } else if (d.loopOut === null) {
+    if (v.currentTime <= d.loopIn) {
+      message("Move forward in the track before setting Loop OUT.");
+      return;
+    }
+
+    d.loopOut = v.currentTime;
+    message("Loop active on Deck " + id);
+  } else {
+    d.loopIn = null;
+    d.loopOut = null;
+    message("Loop disabled on Deck " + id);
+  }
+}
+
+function updateMixer() {
+  const cross =
+    Number(document.getElementById("crossfader").value) / 100;
+
+  const master =
+    Number(document.getElementById("master").value);
+
+  const volumeA =
+    Number(document.getElementById("volumeA").value);
+
+  const volumeB =
+    Number(document.getElementById("volumeB").value);
+
+  // Equal-power crossfader.
+  decks.A.video.volume =
+    Math.cos(cross * Math.PI / 2) * volumeA * master;
+
+  decks.B.video.volume =
+    Math.sin(cross * Math.PI / 2) * volumeB * master;
+}
+
+function toggleVideoFullscreen() {
+  const a = decks.A.video;
+  const b = decks.B.video;
+
+  const target = !a.paused ? a : b;
+
+  if (!target.src) {
+    message("Load a video on either deck first.");
+    return;
+  }
+
+  if (target.requestFullscreen) {
+    target.requestFullscreen().catch(() => {
+      message("Use your browser's video fullscreen control.");
+    });
+  } else if (target.webkitEnterFullscreen) {
+    target.webkitEnterFullscreen();
+  } else {
+    message("Fullscreen is not supported in this browser.");
+  }
+}
+
+updateMixer();
 </script>
+
 </body>
-</html>
+  </html>
