@@ -1,9 +1,9 @@
-# Chronixx-dj<!DOCTYPE html>
+# Boazi-dj<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ChronixDJ Pro</title>
+<title>BoaziDJ Pro</title>
 
 <style>
 * {
@@ -197,7 +197,7 @@ footer {
 <body>
 
 <header>
-  <h1>CHRONIXDJ</h1>
+  <h1>BOAZIDJ</h1>
   <p>PRO DJ & VIDEO MIXING STUDIO</p>
 </header>
 
@@ -379,7 +379,7 @@ footer {
 </section>
 
 <footer>
-  CHRONIXDJ PRO • YOUR MUSIC, YOUR MIX
+  BOAZIDJ PRO • YOUR MUSIC, YOUR MIX
 </footer>
 
 </main>
@@ -620,4 +620,4 @@ updateMixer();
 
 </body>
 </html>
-Chronixx DJ pro - professional DJ and Video mixing App
+Boazi DJ pro - professional DJ and Video mixing App
